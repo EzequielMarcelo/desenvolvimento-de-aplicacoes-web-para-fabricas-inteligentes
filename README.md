@@ -1,6 +1,6 @@
 # Desenvolvimento de Aplicações Web para Fábricas Inteligentes: Explorando o Potencial do Python e dos Dispositivos da Internet das Coisas (IoT)
 
-<p align="center"><img src="imagens/diagrama-geral-do-projeto.jpg" height="400"></p>
+<p align="center"><img src="docs/imagens/diagrama-geral-do-projeto.jpg" height="400"></p>
 
 Este projeto de Iniciação Científica, desenvolvido no Instituto Federal do Espírito Santo (IFES), busca explorar como tecnologias modernas podem 
 transformar processos industriais, com foco no conceito de fábricas inteligentes. A proposta integra dispositivos IoT e soluções baseadas em Python 
