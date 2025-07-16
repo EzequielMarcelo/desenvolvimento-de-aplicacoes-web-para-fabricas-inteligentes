@@ -22,4 +22,6 @@ ou análise de eficiência.
 
 ## Sobre o Repositório
 Este repositório contém a documentação central do projeto, com guias técnicos, diagramas de arquitetura e explicações detalhadas das soluções 
-desenvolvidas.
+desenvolvidas. Para acessar o código-fonte e as implementações práticas:
+ - [Repositorio da API](https://github.com/EzequielMarcelo/desenvolvimento-de-aplicacoes-web-para-fabricas-inteligentes-api)
+ - [Repositorio do fiwmware](https://github.com/EzequielMarcelo/desenvolvimento-de-aplicacoes-web-para-fabricas-inteligentes-api)
