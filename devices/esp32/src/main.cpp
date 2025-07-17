@@ -1,14 +1,48 @@
 #include <Arduino.h>
 #include <WiFi.h>
 #include <HTTPClient.h>
+#include <FS.h>
+#include <SPIFFS.h>
+#include <ArduinoJson.h>
 
 // Configurações da rede Wi-Fi
-const char* ssid = "WIFI-TESTE";
-const char* password = "12345678";
+String ssid;
+String password;
 
 const char* api_url = "http://192.168.18.60:8000/temperatura";  //IP e porta
 
-// Função para simular temperatura
+bool loadWiFiConfig(const char* filename = "/wifi_config.json") 
+{
+  if (!SPIFFS.begin(true)) 
+  {
+    Serial.println("Erro ao iniciar SPIFFS");
+    return false;
+  }
+
+  File file = SPIFFS.open(filename);
+  if (!file || file.isDirectory()) 
+  {
+    Serial.println("Arquivo de configuração WiFi não encontrado");
+    return false;
+  }
+
+  JsonDocument doc;
+  DeserializationError err = deserializeJson(doc, file);
+  
+  if (err) 
+  {
+    Serial.print("Erro no parse do JSON: ");
+    Serial.println(err.c_str());
+    return false;
+  }
+
+  ssid = doc["ssid"].as<String>();
+  password = doc["password"].as<String>();
+  ssid.trim();
+  password.trim();
+  return true;
+}
+
 float getTemperatura() 
 {
   return 25.0 + random(-10, 10) * 0.1;
@@ -17,10 +51,18 @@ float getTemperatura()
 void setup() 
 {
   Serial.begin(115200);
-  WiFi.mode(WIFI_STA); 
-  WiFi.begin(ssid, password);
 
-  Serial.print("Conectando-se ao WiFi");
+  if (!loadWiFiConfig()) 
+  {
+    Serial.println("Não foi possível carregar configuração WiFi.");
+    return;
+  }
+
+  Serial.print("Conectando-se ao WiFi: ");
+  Serial.print(ssid.c_str());
+  WiFi.mode(WIFI_STA); 
+  WiFi.begin(ssid.c_str(), password.c_str());
+  
   while (WiFi.status() != WL_CONNECTED) 
   {
     delay(500);

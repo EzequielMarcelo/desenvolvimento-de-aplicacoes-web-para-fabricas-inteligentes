@@ -2,6 +2,14 @@
 data/database/*
 !data/database/.gitkeep
 
+# Ignorar todo o conteúdo de devices/esp32/data/, exceto .gitkeep
+devices/esp32/data/*
+!devices/esp32/data/.gitkeep
+
+#PlatformIO
+.pio
+.vscode
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
